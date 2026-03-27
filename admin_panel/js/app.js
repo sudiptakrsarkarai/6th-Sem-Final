@@ -520,8 +520,9 @@ async function loadSettings() {
     const config = data.success ? data.data : {};
 
     const radiusKm = config.orderRadiusKm?.value ?? 15;
-    const platformFee = config.platformFeePercent?.value ?? 10;
+    const platformFee = config.platformFeePercent?.value ?? 5;
     const maxOrders = config.maxOrdersPerDriver?.value ?? 1;
+    const isCommissionEnabled = config.isCommissionEnabled?.value ?? true;
 
     content.innerHTML = `
       <div class="section-card">
@@ -546,6 +547,24 @@ async function loadSettings() {
                 <span class="slider-value" id="radiusValue">${radiusKm} km</span>
                 <span>50 km</span>
               </div>
+            </div>
+          </div>
+
+          <div class="setting-card">
+            <div class="setting-card-header">
+              <div class="setting-icon" style="background:var(--yellow);color:white;">
+                <i class="fas fa-wallet"></i>
+              </div>
+              <div>
+                <h3>Require Recharge</h3>
+                <p>Toggle if drivers need balance to accept orders</p>
+              </div>
+            </div>
+            <div class="setting-control" style="padding-top:10px;">
+              <select id="commissionToggle" class="filter-select" style="width:100%;font-size:16px;padding:8px;">
+                <option value="true" ${isCommissionEnabled ? 'selected' : ''}>Enabled (Require Recharge)</option>
+                <option value="false" ${!isCommissionEnabled ? 'selected' : ''}>Disabled (No Recharge Needed)</option>
+              </select>
             </div>
           </div>
 
@@ -623,6 +642,7 @@ async function saveSettings() {
       orderRadiusKm: parseInt(document.getElementById('radiusSlider').value),
       platformFeePercent: parseInt(document.getElementById('feeSlider').value),
       maxOrdersPerDriver: parseInt(document.getElementById('maxOrdersSlider').value),
+      isCommissionEnabled: document.getElementById('commissionToggle').value === 'true',
     };
 
     const data = await apiPut('/admin/config', updates);
