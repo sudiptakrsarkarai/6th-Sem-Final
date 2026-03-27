@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: loadgo-api
+    env: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start # This fixes the nodemon permission denied error
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
