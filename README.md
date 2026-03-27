@@ -529,8 +529,8 @@ const distance = 2 * R * Math.asin(√(sin²(Δlat/2) + cos(lat1) × cos(lat2) �
 ## 👨‍💻 Developer
 
 <p align="center">
-  <strong>Sudipta K Sarkar</strong><br>
-  BCA 6th Semester Student<br>
+  
+  BCA 6th Semester Final Year Students<br>
   <em>ADTU — Assam Down Town University</em><br>
   Guwahati, Assam, India
 </p>
